@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Takwine - La plateforme sociale éducative pour étudiants. Partagez, apprenez et défier vos pairs." />
+    <title>Takwine — Plateforme Éducative Étudiante</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              primary: {
+                50: '#eff6ff',
+                100: '#dbeafe',
+                200: '#bfdbfe',
+                300: '#93c5fd',
+                400: '#60a5fa',
+                500: '#3b82f6',
+                600: '#2563eb',
+                700: '#1d4ed8',
+                800: '#1e40af',
+                900: '#1e3a8a',
+              },
+              accent: {
+                400: '#fbbf24',
+                500: '#f59e0b',
+              },
+              success: {
+                400: '#34d399',
+                500: '#10b981',
+              },
+              dark: {
+                50: '#f8fafc',
+                100: '#f1f5f9',
+                200: '#e2e8f0',
+                300: '#cbd5e1',
+                400: '#94a3b8',
+                500: '#64748b',
+                600: '#475569',
+                700: '#334155',
+                800: '#1e293b',
+                900: '#0f172a',
+                950: '#020617',
+              }
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.3s ease-in-out',
+              'slide-up': 'slideUp 0.3s ease-out',
+              'slide-down': 'slideDown 0.2s ease-out',
+              'pulse-like': 'pulseLike 0.3s ease-in-out',
+              'bounce-soft': 'bounceSoft 0.5s ease-in-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              slideUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              slideDown: {
+                '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              pulseLike: {
+                '0%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.3)' },
+                '100%': { transform: 'scale(1)' },
+              },
+              bounceSoft: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-5px)' },
+              }
+            },
+            backdropBlur: {
+              xs: '2px',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0f172a;
+        color: #f1f5f9;
+        min-height: 100vh;
+      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #1e293b; }
+      ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+
+      /* Glass morphism */
+      .glass {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255,255,255,0.05);
+      }
+      .glass-light {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      /* Gradient text */
+      .gradient-text {
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Post card hover */
+      .post-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+      .post-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      }
+
+      /* Like button animation */
+      .like-btn.liked { color: #ef4444; }
+      .like-btn.animate { animation: pulseLike 0.3s ease-in-out; }
+
+      /* Notification dot */
+      .notif-dot {
+        width: 8px; height: 8px;
+        background: #ef4444;
+        border-radius: 50%;
+        position: absolute;
+        top: -2px; right: -2px;
+      }
+
+      /* Input focus ring */
+      .input-focus {
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .input-focus:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+        outline: none;
+      }
+
+      /* Badge types */
+      .badge-challenge { background: linear-gradient(135deg, #f59e0b, #f97316); }
+      .badge-event { background: linear-gradient(135deg, #10b981, #059669); }
+      .badge-resource { background: linear-gradient(135deg, #3b82f6, #6366f1); }
+
+      /* Avatar ring */
+      .avatar-ring { border: 2px solid #2563eb; }
+      
+      /* Sidebar item active */
+      .nav-item-active {
+        background: linear-gradient(135deg, rgba(37,99,235,0.2), rgba(99,102,241,0.1));
+        border-left: 3px solid #2563eb;
+        color: #60a5fa;
+      }
+
+      /* Modal overlay */
+      .modal-overlay {
+        position: fixed; inset: 0;
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(4px);
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      /* Skeleton loading */
+      .skeleton {
+        background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+        background-size: 200% 100%;
+        animation: skeleton 1.5s infinite;
+      }
+      @keyframes skeleton {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
