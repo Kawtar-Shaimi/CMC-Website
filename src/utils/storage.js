@@ -6,6 +6,7 @@ const KEYS = {
     USERS: 'takwine_users',
     POSTS: 'takwine_posts',
     COMMENTS: 'takwine_comments',
+    CLUBS: 'takwine_clubs',      // { userId: [clubId, ...] }
     INITIALIZED: 'takwine_initialized',
 };
 
@@ -153,4 +154,33 @@ export function toggleLikeComment(commentId, userId) {
 // ─── ID generator ─────────────────────────────────────────────────
 export function generateId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
+
+// ─── Club memberships ─────────────────────────────────────────────
+// Stored as { [userId]: [clubId1, clubId2, ...] }
+function getAllClubMemberships() {
+    return JSON.parse(localStorage.getItem(KEYS.CLUBS) || '{}');
+}
+
+export function getUserClubs(userId) {
+    return getAllClubMemberships()[userId] || [];
+}
+
+export function isUserInClub(userId, clubId) {
+    return getUserClubs(userId).includes(clubId);
+}
+
+export function joinClub(userId, clubId) {
+    const all = getAllClubMemberships();
+    const current = all[userId] || [];
+    if (!current.includes(clubId)) {
+        all[userId] = [...current, clubId];
+        localStorage.setItem(KEYS.CLUBS, JSON.stringify(all));
+    }
+}
+
+export function leaveClub(userId, clubId) {
+    const all = getAllClubMemberships();
+    all[userId] = (all[userId] || []).filter(id => id !== clubId);
+    localStorage.setItem(KEYS.CLUBS, JSON.stringify(all));
 }
