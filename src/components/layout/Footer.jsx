@@ -46,7 +46,7 @@ export default function Footer() {
                 <div className="mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
                     <p>© 2026 Takwine · Tous droits réservés</p>
                     <p className="flex items-center gap-1">
-                        Fait avec <Heart size={12} className="text-red-400 fill-current" /> pour les étudiants algériens
+                        Fait avec <Heart size={12} className="text-red-400 fill-current" /> pour les étudiants CMC
                     </p>
                 </div>
             </div>
